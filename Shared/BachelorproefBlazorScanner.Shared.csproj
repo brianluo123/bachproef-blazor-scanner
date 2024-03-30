@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SupportedPlatform Include="browser" />
+    <ProjectReference Include="..\BachelorproefBlazorScanner.Domain\BachelorproefBlazorScanner.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Scans\" />
+    <SupportedPlatform Include="browser" />
   </ItemGroup>
 </Project>
