@@ -1,6 +1,6 @@
 ﻿namespace BachelorproefBlazorScanner.Client.Pages.Shipments;
 
-public class ShipmentService
+public class ScanService
 {
 
 }
