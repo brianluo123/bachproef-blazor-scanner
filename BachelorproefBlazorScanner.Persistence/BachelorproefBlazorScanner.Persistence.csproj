@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Configurations\Scans\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.28" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BachelorproefBlazorScanner.Domain\BachelorproefBlazorScanner.Domain.csproj" />
   </ItemGroup>
 
 </Project>
