@@ -1,8 +1,16 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using BachelorproefBlazorScanner.Persistence;
+using BachelorproefBlazorScanner.Services.Scans;
+using BachelorproefBlazorScanner.Shared.Scans;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IScanService, ScanService>();
+
+builder.Services.AddDbContext<ScannerDbContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
