@@ -1,4 +1,5 @@
-﻿using BachelorproefBlazorScanner.Shared.Scans;
+﻿using BachelorproefBlazorScanner.Domain.Scans;
+using BachelorproefBlazorScanner.Shared.Scans;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BachelorproefBlazorScanner.Server.Controllers.Scans;
@@ -14,10 +15,17 @@ public class ScansController : ControllerBase
         _scanService = scanService;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetScans()
+    {
+        var scans = await _scanService.GetScansAsync();
+        return Ok(scans);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateScan([FromBody] ScanDto.Create scanDto)
     {
-        var scanId = await _scanService.CreateScanAsync(scanDto);
-        return Ok(scanId);
+        var scanBarcode = await _scanService.CreateScanAsync(scanDto);
+        return Ok(scanBarcode);
     }
 }

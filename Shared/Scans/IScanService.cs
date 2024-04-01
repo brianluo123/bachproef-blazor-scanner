@@ -1,6 +1,9 @@
-﻿namespace BachelorproefBlazorScanner.Shared.Scans;
+﻿using BachelorproefBlazorScanner.Domain.Scans;
+
+namespace BachelorproefBlazorScanner.Shared.Scans;
 
 public interface IScanService
 {
-    Task<int> CreateScanAsync(ScanDto.Create scan);
+    Task<IEnumerable<Scan>> GetScansAsync();
+    Task<string> CreateScanAsync(ScanDto.Create scan);
 }
