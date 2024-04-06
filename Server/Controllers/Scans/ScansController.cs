@@ -23,9 +23,9 @@ public class ScansController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateScan([FromBody] ScanDto.Create scanDto)
+    public async Task<IActionResult> CreateScan([FromBody] Scan scan)
     {
-        var scanBarcode = await _scanService.CreateScanAsync(scanDto);
+        var scanBarcode = await _scanService.CreateScanAsync(scan);
         return Ok(scanBarcode);
     }
 }

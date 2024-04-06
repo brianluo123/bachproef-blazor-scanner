@@ -8,11 +8,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.Shared", "Shared\BachelorproefBlazorScanner.Shared.csproj", "{7E870654-D7AE-4319-BD2E-5E50A82EA4C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BachelorproefBlazorScanner.Domain", "BachelorproefBlazorScanner.Domain\BachelorproefBlazorScanner.Domain.csproj", "{68E90E62-B774-4CAE-ABFD-DD98869E791B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.Domain", "BachelorproefBlazorScanner.Domain\BachelorproefBlazorScanner.Domain.csproj", "{68E90E62-B774-4CAE-ABFD-DD98869E791B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BachelorproefBlazorScanner.Persistence", "BachelorproefBlazorScanner.Persistence\BachelorproefBlazorScanner.Persistence.csproj", "{18863449-B7A7-4D51-88CF-7C90ACCE533D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.Persistence", "BachelorproefBlazorScanner.Persistence\BachelorproefBlazorScanner.Persistence.csproj", "{18863449-B7A7-4D51-88CF-7C90ACCE533D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BachelorproefBlazorScanner.Services", "BachelorproefBlazorScanner.Services\BachelorproefBlazorScanner.Services.csproj", "{4CBBFD99-FC67-45C4-8DD0-D87CCE4B9536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.Services", "BachelorproefBlazorScanner.Services\BachelorproefBlazorScanner.Services.csproj", "{4CBBFD99-FC67-45C4-8DD0-D87CCE4B9536}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

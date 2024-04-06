@@ -1,9 +1,40 @@
 ﻿@page "/shipment"
+@using BachelorproefBlazorScanner.Domain.Scans
+@using BachelorproefBlazorScanner.Client.Components
+@inject IScanService ScanService
 
 <PageTitle>Shipment</PageTitle>
 
 <h1>Shipment</h1>
 
-@code {
+<div>
+    <p class="fw-bold">Scan a barcode</p>
+</div>
 
+<div>
+    <p class="fw-bold">Select a destination</p>
+</div>
+
+<div>
+    <p class="fw-bold">Choose a zone</p>
+</div>
+
+<p class="fw-bold">Scanned barcodes</p>
+@if (scans == null) {
+    <p>Loading...</p>
+} else {
+    @foreach (var scan in scans) {
+        <div class="my-1">
+            <ScanItem Scan="scan" />
+        </div>
+    }
+}
+
+@code {
+    private IEnumerable<Scan>? scans;
+
+    protected override async Task OnInitializedAsync()
+    {
+        scans = await ScanService.GetScansAsync();
+    }
 }

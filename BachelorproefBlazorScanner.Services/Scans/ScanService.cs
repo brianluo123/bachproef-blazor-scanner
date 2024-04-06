@@ -21,9 +21,8 @@ public class ScanService : IScanService
         return await query.ToListAsync();
     }
 
-    public async Task<string> CreateScanAsync(ScanDto.Create scanDto)
+    public async Task<string> CreateScanAsync(Scan scan)
     {
-        Scan scan = new (scanDto.Barcode, scanDto.Zone, scanDto.Destination);
         _scannerDbContext.Set<Scan>().Add(scan);
         await _scannerDbContext.SaveChangesAsync();
         return scan.Barcode;
