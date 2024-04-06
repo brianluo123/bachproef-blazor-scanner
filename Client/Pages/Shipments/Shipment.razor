@@ -7,19 +7,43 @@
 
 <h1>Shipment</h1>
 
-<div>
-    <p class="fw-bold">Scan a barcode</p>
-</div>
+<EditForm Model="@scan" OnValidSubmit="CreateScanAsync">
 
-<div>
-    <p class="fw-bold">Select a destination</p>
-</div>
+    <!--Barcode-->
+    <div class="field">
+        <label class="fw-bold">Scan a barcode</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="scan.Barcode" />
+        </div>
+    </div>
 
-<div>
-    <p class="fw-bold">Choose a zone</p>
-</div>
+    <!--Destination-->
+    <div class="field">
+        <label class="fw-bold">Select a destination</label>
+        <div class="control">
+            <InputSelect class="input" @bind-Value="scan.Destination">
+                @foreach(var destination in destinations) {
+                    <option value="@destination">@destination</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
 
-<p class="fw-bold">Scanned barcodes</p>
+    <!--Zone-->
+    <div class="field">
+        <label class="label fw-bold">Choose a zone</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="scan.Zone" />
+        </div>
+    </div>
+
+    <!--Submit button-->
+    <div class="buttons">
+        <button class="button" type="submit">OK</button>
+    </div>
+</EditForm>
+
+<h5 class="mt-5">Scanned barcodes</h5>
 @if (scans == null) {
     <p>Loading...</p>
 } else {
@@ -32,9 +56,24 @@
 
 @code {
     private IEnumerable<Scan>? scans;
+    private Scan scan = new();
+    private List<string> destinations = new();
 
     protected override async Task OnInitializedAsync()
     {
+        LoadDestinations();
         scans = await ScanService.GetScansAsync();
+    }
+
+    private void LoadDestinations()
+    {
+        destinations.Add("Gent");
+        destinations.Add("Antwerpen");
+        destinations.Add("Brussel");
+    }
+
+    private async Task CreateScanAsync()
+    {
+        //await ScanService.CreateScanAsync(scan);
     }
 }
