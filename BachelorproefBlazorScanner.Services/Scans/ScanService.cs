@@ -21,10 +21,10 @@ public class ScanService : IScanService
         return await query.ToListAsync();
     }
 
-    public async Task<string> CreateScanAsync(Scan scan)
+    public async Task<Scan> CreateScanAsync(Scan scan)
     {
         _scannerDbContext.Set<Scan>().Add(scan);
         await _scannerDbContext.SaveChangesAsync();
-        return scan.Barcode;
+        return scan;
     }
 }

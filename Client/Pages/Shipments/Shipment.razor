@@ -2,6 +2,8 @@
 @using BachelorproefBlazorScanner.Domain.Scans
 @using BachelorproefBlazorScanner.Client.Components
 @inject IScanService ScanService
+@using BlazorBarcodeScanner.ZXing.JS
+@using System.Diagnostics
 
 <PageTitle>Shipment</PageTitle>
 
@@ -10,40 +12,40 @@
 <EditForm Model="@scan" OnValidSubmit="CreateScanAsync">
 
     <!--Barcode-->
-    <div class="field">
-        <label class="fw-bold">Scan a barcode</label>
-        <div class="control">
-            <InputText class="input" @bind-Value="scan.Barcode" />
+    <div class="form-group mb-2">
+        <label>Scan a barcode</label>
+        <div class="input-group">
+            <InputText class="form-control" @bind-Value="scan.Barcode" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" @onclick="OpenModal">Scan</button>
+            </div>
         </div>
     </div>
 
     <!--Destination-->
-    <div class="field">
-        <label class="fw-bold">Select a destination</label>
-        <div class="control">
-            <InputSelect class="input" @bind-Value="scan.Destination">
-                @foreach(var destination in destinations) {
-                    <option value="@destination">@destination</option>
-                }
-            </InputSelect>
-        </div>
+    <div class="form-group mb-2">
+        <label>Select a destination</label>
+        <InputSelect class="form-control" @bind-Value="scan.Destination">
+            <option selected="true" disabled="disabled">--select--</option>
+            @foreach(var destination in destinations) {
+                <option value="@destination">@destination</option>
+            }
+        </InputSelect>
     </div>
 
     <!--Zone-->
-    <div class="field">
-        <label class="label fw-bold">Choose a zone</label>
-        <div class="control">
-            <InputText class="input" @bind-Value="scan.Zone" />
-        </div>
+    <div class="form-group mb-2">
+        <label>Choose a zone</label>
+        <InputText class="form-control" @bind-Value="scan.Zone" />
     </div>
 
     <!--Submit button-->
-    <div class="buttons">
-        <button class="button" type="submit">OK</button>
+    <div class="buttons d-flex justify-content-end">
+        <button class="btn btn-secondary" type="submit">OK</button>
     </div>
 </EditForm>
 
-<h5 class="mt-5">Scanned barcodes</h5>
+<h5>Scanned barcodes</h5>
 @if (scans == null) {
     <p>Loading...</p>
 } else {
@@ -54,14 +56,48 @@
     }
 }
 
+@if(showModal) {
+    <div class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scan a barcode</h5>
+                    <button type="button" class="close" @onclick="CloseModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <BlazorBarcodeScanner.ZXing.JS.BarcodeReader Title=""
+                                                                 StartCameraAutomatically="true"
+                                                                 ShowResult="false"
+                                                                 ShowStart="false"
+                                                                 ShowStop="false"
+                                                                 ShowReset="false"
+                                                                 ShowToggleTorch="false"
+                                                                 ShowVideoDeviceList="false"
+                                                                 VideoWidth="470"
+                                                                 VideoHeight="300"
+                                                                 OnBarcodeReceived="ReceivedBarcodeText" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
     private IEnumerable<Scan>? scans;
     private Scan scan = new();
     private List<string> destinations = new();
+    private bool showModal = false;
 
     protected override async Task OnInitializedAsync()
     {
         LoadDestinations();
+        await GetScansAsync();
+    }
+
+    private async Task GetScansAsync()
+    {
         scans = await ScanService.GetScansAsync();
     }
 
@@ -74,6 +110,24 @@
 
     private async Task CreateScanAsync()
     {
-        //await ScanService.CreateScanAsync(scan);
+        await ScanService.CreateScanAsync(scan);
+        scan = new();
+        await GetScansAsync();
+    }
+
+    private void ReceivedBarcodeText(BarcodeReceivedEventArgs args)
+    {
+        scan.Barcode = args.BarcodeText;
+        CloseModal();
+    }
+
+    private void OpenModal()
+    {
+        showModal = true;
+    }
+
+    private void CloseModal()
+    {
+        showModal = false;
     }
 }

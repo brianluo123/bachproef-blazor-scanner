@@ -5,5 +5,5 @@ namespace BachelorproefBlazorScanner.Shared.Scans;
 public interface IScanService
 {
     Task<IEnumerable<Scan>> GetScansAsync();
-    Task<string> CreateScanAsync(Scan scan);
+    Task<Scan> CreateScanAsync(Scan scan);
 }

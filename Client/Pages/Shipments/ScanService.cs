@@ -20,9 +20,9 @@ public class ScanService : IScanService
         return response!;
     }
 
-    public async Task<string> CreateScanAsync(Scan scan)
+    public async Task<Scan> CreateScanAsync(Scan scan)
     {
         var response = await client.PostAsJsonAsync(endpoint, scan);
-        return await response.Content.ReadFromJsonAsync<string>();
+        return await response.Content.ReadFromJsonAsync<Scan>();
     }
 }
