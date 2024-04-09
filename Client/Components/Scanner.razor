@@ -1,5 +1,22 @@
-﻿<h3>Scanner</h3>
+﻿@using BlazorBarcodeScanner.ZXing.JS
+
+<BlazorBarcodeScanner.ZXing.JS.BarcodeReader Title=""
+                                             StartCameraAutomatically="true"
+                                             ShowResult="false"
+                                             ShowStart="false"
+                                             ShowStop="false"
+                                             ShowReset="false"
+                                             ShowToggleTorch="false"
+                                             ShowVideoDeviceList="false"
+                                             VideoWidth="470"
+                                             VideoHeight="300"
+                                             OnBarcodeReceived="HandleBarcodeReceived" />
 
 @code {
+    [Parameter] public EventCallback<BarcodeReceivedEventArgs> OnBarcodeReceived { get; set; } = default!;
 
+    protected async Task HandleBarcodeReceived(BarcodeReceivedEventArgs args)
+    {
+        await OnBarcodeReceived.InvokeAsync(args);
+    }
 }

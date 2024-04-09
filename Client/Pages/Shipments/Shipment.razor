@@ -39,8 +39,8 @@
         <InputText class="form-control" @bind-Value="scan.Zone" />
     </div>
 
-    <!--Submit button-->
-    <div class="buttons d-flex justify-content-end">
+    <!--Submit button--> 
+    <div class="buttons d-flex justify-content-end mt-3">
         <button class="btn btn-secondary" type="submit">OK</button>
     </div>
 </EditForm>
@@ -67,17 +67,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <BlazorBarcodeScanner.ZXing.JS.BarcodeReader Title=""
-                                                                 StartCameraAutomatically="true"
-                                                                 ShowResult="false"
-                                                                 ShowStart="false"
-                                                                 ShowStop="false"
-                                                                 ShowReset="false"
-                                                                 ShowToggleTorch="false"
-                                                                 ShowVideoDeviceList="false"
-                                                                 VideoWidth="470"
-                                                                 VideoHeight="300"
-                                                                 OnBarcodeReceived="ReceivedBarcodeText" />
+                    <Scanner OnBarcodeReceived="ReceivedBarcodeText" />
                 </div>
             </div>
         </div>
