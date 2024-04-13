@@ -1,12 +1,10 @@
 ﻿@using BachelorproefBlazorScanner.Domain.Scans
 
-<div class="card">
-    <div class="card-content">
-        <div class="content">
-            <p>@Scan.Barcode @Scan.Destination @Scan.Zone</p>
-        </div>
-    </div>
-</div>
+<tr>
+    <td>@Scan.Barcode</td>
+    <td>@Scan.Destination</td>
+    <td>@Scan.Zone</td>
+</tr>
 
 @code {
     [Parameter] public Scan Scan { get; set; } = default!;

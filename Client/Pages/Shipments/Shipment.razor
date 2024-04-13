@@ -49,14 +49,23 @@
 @if (scans == null) {
     <p>Loading...</p>
 } else {
-    @foreach (var scan in scans) {
-        <div class="my-1">
-            <ScanItem Scan="scan" />
-        </div>
-    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Barcode</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Zone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var scan in scans) {
+                <ScanItem Scan="scan" />
+            }
+        </tbody>
+    </table>
 }
 
-@if(showModal) {
+@if (showModal) {
     <div class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
