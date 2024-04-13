@@ -49,7 +49,7 @@
 @if (scans == null) {
     <p>Loading...</p>
 } else {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Barcode</th>
@@ -82,6 +82,14 @@
         </div>
     </div>
 }
+
+<style>
+    .modal-body {
+        max-width: fit-dialog;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 
 @code {
     private IEnumerable<Scan>? scans;

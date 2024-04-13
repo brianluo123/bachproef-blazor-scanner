@@ -8,13 +8,13 @@
                                              ShowReset="false"
                                              ShowToggleTorch="false"
                                              ShowVideoDeviceList="false"
-                                             VideoWidth="470"
-                                             VideoHeight="300"
+                                             VideoWidth="350"
+                                             VideoHeight="350"
                                              OnBarcodeReceived="HandleBarcodeReceived" />
 
 @code {
     [Parameter] public EventCallback<BarcodeReceivedEventArgs> OnBarcodeReceived { get; set; } = default!;
-
+    public bool isFull = false;
     protected async Task HandleBarcodeReceived(BarcodeReceivedEventArgs args)
     {
         await OnBarcodeReceived.InvokeAsync(args);
