@@ -48,6 +48,8 @@
 <h5>Scanned barcodes</h5>
 @if (scans == null) {
     <p>Loading...</p>
+} else if (scans.Count() == 0) {
+    <p>No scans yet</p>
 } else {
     <table class="table table-striped">
         <thead>

@@ -14,8 +14,6 @@
                                              VideoHeight="@VideoSize"
                                              OnBarcodeReceived="HandleBarcodeReceived" />
 
-
-
 @code {
     [Parameter] public EventCallback<BarcodeReceivedEventArgs> OnBarcodeReceived { get; set; } = default!;
     public int WindowWidth { get; set; }

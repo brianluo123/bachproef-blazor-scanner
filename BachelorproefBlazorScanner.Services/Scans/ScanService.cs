@@ -2,7 +2,6 @@
 using BachelorproefBlazorScanner.Persistence;
 using BachelorproefBlazorScanner.Shared.Scans;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
 
 namespace BachelorproefBlazorScanner.Services.Scans;
 
