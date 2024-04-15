@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BachelorproefBlazorScanner.Services\BachelorproefBlazorScanner.Services.csproj" />
     <ProjectReference Include="..\Shared\BachelorproefBlazorScanner.Shared.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,6 @@
 ﻿@using BlazorBarcodeScanner.ZXing.JS
+@using BachelorproefBlazorScanner.Services
+@inject IJSRuntime JsRuntime
 
 <BlazorBarcodeScanner.ZXing.JS.BarcodeReader Title=""
                                              StartCameraAutomatically="true"
@@ -8,15 +10,29 @@
                                              ShowReset="false"
                                              ShowToggleTorch="false"
                                              ShowVideoDeviceList="false"
-                                             VideoWidth="350"
-                                             VideoHeight="350"
+                                             VideoWidth="@VideoSize"
+                                             VideoHeight="@VideoSize"
                                              OnBarcodeReceived="HandleBarcodeReceived" />
+
+
 
 @code {
     [Parameter] public EventCallback<BarcodeReceivedEventArgs> OnBarcodeReceived { get; set; } = default!;
-    public bool isFull = false;
+    public int WindowWidth { get; set; }
+    public int VideoSize => WindowWidth < 500 ? 300 : 450;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetDimensions();
+    }
+
     protected async Task HandleBarcodeReceived(BarcodeReceivedEventArgs args)
     {
         await OnBarcodeReceived.InvokeAsync(args);
+    }
+
+    async Task GetDimensions()
+    {
+        WindowWidth = await JsRuntime.InvokeAsync<int>("eval", "window.innerWidth");
     }
 }
