@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ScannerDbContext>(options => {
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -37,9 +38,12 @@ app.UseStaticFiles();
 app.UseCors(corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
 app.UseRouting();
 
+app.UseEndpoints(endpoints => {
+    endpoints.MapHealthChecks("/api/healthcheck").AllowAnonymous();
+    endpoints.MapControllers();
+});
 
 app.MapRazorPages();
-app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
