@@ -33,7 +33,7 @@
       "source": "dbo.scans",
       "permissions": [
         {
-          "actions": [ "*" ],
+          "actions": ["create", "read", "update", "delete"],
           "role": "anonymous"
         }
       ]
