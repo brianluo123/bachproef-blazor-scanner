@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using BachelorproefBlazorScanner.Domain.Scans
 @using BachelorproefBlazorScanner.Client.Components
-@inject IScanService ScanService
+@inject HttpClient HttpClient
 
 <PageTitle>Index</PageTitle>
 
@@ -40,7 +40,9 @@
 
     private async Task GetScansAsync()
     {
-        scans = await ScanService.GetScansAsync();
+        //scans = await ScanService.GetScansAsync();
+
+        scans = await HttpClient.GetFromJsonAsync<IEnumerable<Scan>>("api/scans");
     }
 
 }
