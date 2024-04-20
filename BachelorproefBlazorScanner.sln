@@ -14,11 +14,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BachelorproefBlazorScanner.Services", "BachelorproefBlazorScanner.Services\BachelorproefBlazorScanner.Services.csproj", "{4CBBFD99-FC67-45C4-8DD0-D87CCE4B9536}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99B31CE3-BFC1-47D7-8FB1-83F3E8ABF40D}"
-	ProjectSection(SolutionItems) = preProject
-		staticwebapp.config.json = staticwebapp.config.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

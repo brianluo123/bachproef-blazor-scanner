@@ -14,7 +14,6 @@ builder.Services.AddDbContext<ScannerDbContext>(options => {
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
@@ -44,7 +43,6 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllers();
 });
 
-app.MapBlazorHub();
 app.MapRazorPages();
 app.MapFallbackToFile("index.html");
 
