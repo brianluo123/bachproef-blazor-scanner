@@ -4,6 +4,7 @@
 @inject IScanService ScanService
 @using BlazorBarcodeScanner.ZXing.JS
 @using System.Diagnostics
+@inject HttpClient HttpClient
 
 <PageTitle>Shipment</PageTitle>
 
@@ -107,7 +108,12 @@
 
     private async Task GetScansAsync()
     {
-        scans = await ScanService.GetScansAsync();
+        try {
+            scans = await HttpClient.GetFromJsonAsync<IEnumerable<Scan>>("/api/GetScans") ?? new Scan[] { };
+        }
+        catch(Exception ex) {
+            Console.WriteLine(ex.ToString());
+        }
     }
 
     private void LoadDestinations()
@@ -119,7 +125,13 @@
 
     private async Task CreateScanAsync()
     {
-        await ScanService.CreateScanAsync(scan);
+        try {
+            await HttpClient.PostAsJsonAsync("/api/CreateScan", scan);
+        }
+        catch(Exception ex) {
+            Console.WriteLine(ex.ToString());
+        }
+
         scan = new();
         await GetScansAsync();
     }
