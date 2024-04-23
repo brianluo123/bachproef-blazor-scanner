@@ -40,6 +40,12 @@
         <InputText class="form-control" @bind-Value="scan.Zone" />
     </div>
 
+    @if(scanTime != TimeSpan.Zero) {
+        <div>
+            <p>Time to scan barcode: @scanTime.TotalMilliseconds milliseconds</p>
+        </div>
+    }
+
     <!--Submit button--> 
     <div class="buttons d-flex justify-content-end mt-3">
         <button class="btn btn-secondary" type="submit">OK</button>
@@ -99,6 +105,9 @@
     private Scan scan = new();
     private List<string> destinations = new();
     private bool showModal = false;
+    private DateTime startTime;
+    private DateTime endTime;
+    private TimeSpan scanTime;
 
     protected override async Task OnInitializedAsync()
     {
@@ -133,11 +142,14 @@
         }
 
         scan = new();
+        scanTime = TimeSpan.Zero;
         await GetScansAsync();
     }
 
     private void ReceivedBarcodeText(BarcodeReceivedEventArgs args)
     {
+        endTime = DateTime.Now;
+        scanTime = endTime - startTime;
         scan.Barcode = args.BarcodeText;
         CloseModal();
     }
@@ -145,6 +157,7 @@
     private void OpenModal()
     {
         showModal = true;
+        startTime = DateTime.Now;
     }
 
     private void CloseModal()
